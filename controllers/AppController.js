@@ -54,4 +54,19 @@ export default class AppController {
 
     return false;
   }
+
+  /**
+   * Update the cache value for rate limiting
+   * @param {string} ipAddress - The user's IP adderss
+   */
+  static async _rateLimit(ipAddress) {
+    const requestsToday = await redisClient.get(ipAddress);
+
+    if (!requestsToday) {
+      const remainingHoursInDay = getRemainingHoursToday();
+      redisClient.set(ipAddress, '1', hoursToSeconds(remainingHoursInDay));
+    } else {
+      redisClient.incr(ipAddress);
+    }
+  }
 }
