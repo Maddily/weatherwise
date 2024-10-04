@@ -156,6 +156,47 @@ export default class AppController {
     }
   }
 
+  // Fetch and return weather data for the next 10 days
+  static async getDailyData(req, res) {
+    const { location } = req.params;
+    if (location) {
+      try {
+        // Retrieve the data if cached, otherwise fetch it from the API
+        const cachedData = await AppController._getCachedData(location);
+        const weatherData =
+          cachedData ||
+          (await AppController._fetchData(
+            req.socket.remoteAddress,
+            location,
+            minutesToSeconds(10)
+          ));
+
+        // Extract specific data in every day object for the next 10 days
+        const days = [...weatherData.days].slice(1, 11).map((day) => {
+          return {
+            datetime: day.datetime,
+            icon: day.icon,
+            tempmax: day.tempmax,
+            tempmin: day.tempmin,
+            conditions: day.conditions,
+          };
+        });
+
+        res.status(200).json(days);
+      } catch (error) {
+        if (error.message.startsWith('The location')) {
+          res.status(400).json({ error: error.message });
+        } else if (error.message.startsWith('Too many')) {
+          res.status(429).json({ error: error.message });
+        } else {
+          res.status(500).json({ error: 'Something went wrong!' });
+        }
+      }
+    } else {
+      res.status(400).json({ error: 'Location parameter is required' });
+    }
+  }
+
   /**
    *
    * @param {string} location - The name of a city
