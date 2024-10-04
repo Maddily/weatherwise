@@ -10,6 +10,81 @@ import {
 dotenv.config();
 
 export default class AppController {
+  static _APIKEY = process.env.API_KEY;
+
+  // Fetch weather data and return the current weather details
+  static async getNowData(req, res) {
+    const { location } = req.params;
+    if (location) {
+      try {
+        // Retrieve the data if cached, otherwise fetch it from the API
+        const cachedData = await AppController._getCachedData(location);
+
+        const weatherData =
+          cachedData ||
+          (await AppController._fetchData(
+            req.socket.remoteAddress,
+            location,
+            minutesToSeconds(10)
+          ));
+
+        // Extract the specific properties needed from the retrieved data
+        const { datetime, tempmax, tempmin } = weatherData.days[0];
+        const { tzoffset } = weatherData;
+
+        const currentHour = getCurrentHour(tzoffset);
+        // Get the current hour's details
+        const {
+          temp,
+          feelslike,
+          conditions,
+          icon,
+          humidity,
+          dew,
+          pressure,
+          windspeed,
+          winddir,
+          visibility,
+          uvindex,
+        } = weatherData.days[0].hours[currentHour];
+
+        // Choose an appropriate message according to the visibility value
+        const visibilityText = getVisibilityText(visibility);
+
+        // The retrieved data plus the visibilityText
+        const data = {
+          datetime,
+          temp,
+          feelslike,
+          tempmax,
+          tempmin,
+          conditions,
+          icon,
+          humidity,
+          dew,
+          pressure,
+          windspeed,
+          winddir,
+          visibility,
+          visibilityText,
+          uvindex,
+        };
+
+        res.status(200).json(data);
+      } catch (error) {
+        if (error.message.startsWith('The location')) {
+          res.status(400).json({ error: error.message });
+        } else if (error.message.startsWith('Too many')) {
+          res.status(429).json({ error: error.message });
+        } else {
+          res.status(500).json({ error: 'Something went wrong!' });
+        }
+      }
+    } else {
+      res.status(400).json({ error: 'Location parameter is required' });
+    }
+  }
+
   /**
    *
    * @param {string} location - The name of a city
