@@ -39,4 +39,19 @@ export default class AppController {
       }
     }
   }
+
+  /**
+   * Check if the user has made 20 requests today,
+   * and throw an error if so.
+   * @param {string} ipAddress - The user's IP adderss
+   */
+  static async _checkRateLimit(ipAddress) {
+    const requestsToday = await redisClient.get(ipAddress);
+
+    if (parseInt(requestsToday, 10) >= 30) {
+      return true;
+    }
+
+    return false;
+  }
 }
