@@ -21,4 +21,22 @@ export default class AppController {
 
     return JSON.parse(cachedData);
   }
+
+  /**
+   * Throw an error if the status code of the response
+   * is not in the 200 range.
+   * @param {Promise} response - The response of fetching data from the API
+   * @param {string} location - The name of a city
+   */
+  static _checkResponseStatus(response, location) {
+    if (!response.ok) {
+      if (response.status === 400) {
+        throw new Error(
+          `The location "${location}" could not be found. Please check the spelling and try again.`
+        );
+      } else {
+        throw new Error('Something went wrong!');
+      }
+    }
+  }
 }
