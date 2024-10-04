@@ -85,6 +85,77 @@ export default class AppController {
     }
   }
 
+  // Fetch weather data and return hourly weather details
+  static async getHourlyData(req, res) {
+    const { location } = req.params;
+    if (location) {
+      try {
+        // Retrieve the data if cached, otherwise fetch it from the API
+        const cachedData = await AppController._getCachedData(location);
+        const weatherData =
+          cachedData ||
+          (await AppController._fetchData(
+            req.socket.remoteAddress,
+            location,
+            minutesToSeconds(10)
+          ));
+        const { tzoffset } = weatherData;
+        const nextHour = getCurrentHour(tzoffset) + 1;
+
+        // Extract specific data from each hour object
+        let hours = weatherData.days[0].hours.slice(nextHour).map((hour) => {
+          return {
+            datetime: hour.datetime,
+            icon: hour.icon,
+            temp: hour.temp,
+          };
+        });
+
+        // Display the data of the next 8 hours only
+        if (hours.length > 8) {
+          hours = hours.slice(0, 8);
+        }
+
+        /**
+         * If the hours remaining in the current day are less than 8,
+         * Add hourly data of the following day to have a total of 8.
+         */
+        if (hours.length < 8) {
+          const hoursRemainingToday = hours.length;
+          const numberOfExtraHours = 8 - hoursRemainingToday;
+
+          const extraHours = weatherData.days[1].hours
+            .slice(0, numberOfExtraHours)
+            .map((hour) => {
+              return {
+                datetime: hour.datetime,
+                icon: hour.icon,
+                temp: hour.temp,
+              };
+            });
+
+          const totalHours = [...hours, ...extraHours];
+
+          res.status(200).json(totalHours);
+          return;
+        }
+
+        // Send only the remaining hours (when exactly 8 hours are remaining in the day)
+        res.status(200).json(hours);
+      } catch (error) {
+        if (error.message.startsWith('The location')) {
+          res.status(400).json({ error: error.message });
+        } else if (error.message.startsWith('Too many')) {
+          res.status(429).json({ error: error.message });
+        } else {
+          res.status(500).json({ error: 'Something went wrong!' });
+        }
+      }
+    } else {
+      res.status(400).json({ error: 'Location parameter is required' });
+    }
+  }
+
   /**
    *
    * @param {string} location - The name of a city
