@@ -155,3 +155,12 @@ export function getVisibilityText(visibility) {
 
   return visibilityText;
 }
+
+// Calculate the hours remaining in the day
+export function getRemainingHoursToday() {
+  const tomorrow = startOfTomorrow();
+  const today = new Date();
+  const remainingHoursInDay = differenceInHours(tomorrow, today);
+
+  return remainingHoursInDay;
+}
