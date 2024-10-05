@@ -116,3 +116,12 @@ export function getUvIndexText(uvIndex) {
 export function convertFToC(temp) {
   return Math.round(((temp - 32) * 5) / 9);
 }
+
+/**
+ * Convert the given Celsius temperature to Fahrenheit
+ * @param {number} temp - A temperature in Celsius
+ * @returns The given temperature converted to Fahrenheit
+ */
+export function convertCToF(temp) {
+  return Math.round((temp * 9) / 5 + 32);
+}
