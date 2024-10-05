@@ -52,3 +52,25 @@ export function formatDate(dateString) {
 
   return { formattedDate, dayOfWeek };
 }
+
+/**
+ * Calculate the current hour
+ * @param {number} tzoffset - The time zone offset
+ * @returns The local current hour
+ */
+export function getCurrentHour(tzoffset) {
+  const currentUTC = new Date();
+
+  const currentLocalTime = new Date(
+    currentUTC.getUTCFullYear(),
+    currentUTC.getUTCMonth(),
+    currentUTC.getUTCDate(),
+    currentUTC.getUTCHours(),
+    currentUTC.getUTCMinutes(),
+    currentUTC.getUTCSeconds()
+  );
+
+  currentLocalTime.setHours(currentLocalTime.getHours() + tzoffset);
+
+  return currentLocalTime.getHours();
+}
