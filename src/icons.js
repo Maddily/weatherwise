@@ -39,3 +39,23 @@ export function createHighArrowIcon() {
 
   return svg;
 }
+
+// Create and return an svg icon for wind direction
+export function createWindArrowIcon() {
+  const xmlns = 'http://www.w3.org/2000/svg';
+
+  const svg = document.createElementNS(xmlns, 'svg');
+  svg.setAttribute('fill', '#fff1d4');
+  svg.setAttribute('xmlns', xmlns);
+  svg.setAttribute('viewBox', '0 0 24 24');
+
+  const path = document.createElementNS(xmlns, 'path');
+  path.setAttribute(
+    'd',
+    'M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z'
+  );
+
+  svg.appendChild(path);
+
+  return svg;
+}
