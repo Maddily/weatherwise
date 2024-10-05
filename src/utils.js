@@ -74,3 +74,36 @@ export function getCurrentHour(tzoffset) {
 
   return currentLocalTime.getHours();
 }
+
+/**
+ * Return the appropriate text representation for a given UV index
+ * @param {number} uvIndex - The UV index
+ * @returns The UV index text representation
+ */
+export function getUvIndexText(uvIndex) {
+  let value, phrase;
+
+  if (uvIndex >= 0 && uvIndex <= 2) {
+    value = 'Low';
+    phrase = 'No protection needed. You can safely stay outside.';
+  } else if (uvIndex >= 3 && uvIndex <= 5) {
+    value = 'Moderate';
+    phrase =
+      'Take precautions if you will be outside, such as wearing sunscreen.';
+  } else if (uvIndex >= 6 && uvIndex <= 7) {
+    value = 'High';
+    phrase = 'Protection against sunburn is needed. Wear sunscreen and a hat.';
+  } else if (uvIndex >= 8 && uvIndex <= 10) {
+    value = 'Very High';
+    phrase =
+      'Extra protection is needed. Avoid being outside during midday hours.';
+  } else if (uvIndex >= 11) {
+    value = 'Extreme';
+    phrase = 'Take all precautions. Avoid going outside if possible.';
+  } else {
+    value = 'Invalid UV Index';
+    phrase = 'The UV index value is invalid.';
+  }
+
+  return { value, phrase };
+}
