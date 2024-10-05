@@ -39,3 +39,16 @@ export function formatTime(timeString) {
 
   return format(date, 'h a');
 }
+
+/**
+ * Format the date for the daily forecast section
+ * @param {string} dateString - A date string
+ * @returns The formatted date and the day of the week
+ */
+export function formatDate(dateString) {
+  const date = parse(dateString, 'yyyy-MM-dd', new Date());
+  const formattedDate = format(date, 'd/M');
+  const dayOfWeek = format(date, 'EEE');
+
+  return { formattedDate, dayOfWeek };
+}
