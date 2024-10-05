@@ -125,3 +125,33 @@ export function convertFToC(temp) {
 export function convertCToF(temp) {
   return Math.round((temp * 9) / 5 + 32);
 }
+
+/**
+ * @param {number} visibility - A visibility value
+ * @returns an appropriate message according to the given visibility value
+ */
+export function getVisibilityText(visibility) {
+  // The values are in kilometers
+  const visibilityRanges = [
+    { max: 0.05, text: 'Dense Fog' },
+    { max: 0.2, text: 'Thick Fog' },
+    { max: 0.5, text: 'Moderate Fog' },
+    { max: 1, text: 'Light Fog' },
+    { max: 2, text: 'Very Light Fog' },
+    { max: 2.8, text: 'Light Mist' },
+    { max: 10, text: 'Misty' },
+    { max: 20, text: 'Clear' },
+    { max: Infinity, text: 'Very clear' },
+  ];
+
+  let visibilityText = 'Very clear';
+
+  for (const range of visibilityRanges) {
+    if (visibility <= range.max) {
+      visibilityText = range.text;
+      break;
+    }
+  }
+
+  return visibilityText;
+}
