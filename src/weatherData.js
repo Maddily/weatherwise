@@ -320,3 +320,95 @@ function displayHourlyData(hourlyData) {
   );
   weatherDataContainer.appendChild(hourlyDataSection);
 }
+
+/**
+ * Display daily weather data in the DOM.
+ * @param {object} dailyData - Weather data for the next 10 days
+ */
+function displayDailyData(dailyData) {
+  if (!dailyData) {
+    throw Error('Invalid data:', dailyData);
+  }
+
+  // Create a section for daily data
+  const dailyDataSection = document.createElement('section');
+  dailyDataSection.className = 'daily';
+
+  // Create a heading for the daily data
+  const heading = document.createElement('h2');
+  heading.className = 'daily-heading';
+  heading.textContent = 'Daily Forecast';
+
+  // Create an svg icon for the heading
+  const calendarIcon = createCalendarIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(calendarIcon, heading);
+
+  // Create a container for the daily data
+  const dailyDataContainer = document.createElement('div');
+  dailyDataContainer.className = 'daily-data-container';
+
+  dailyData.forEach((dayData) => {
+    const { datetime, icon, conditions, tempmax, tempmin } = dayData;
+
+    // A container for a day's weather details
+    const dayContainer = document.createElement('div');
+    dayContainer.className = 'day-container';
+
+    // Format the date
+    const { formattedDate, dayOfWeek } = formatDate(datetime);
+
+    // The day
+    const dateContainer = document.createElement('div');
+    const dayNumber = document.createElement('p');
+    dayNumber.className = 'day-number';
+    dayNumber.textContent = formattedDate;
+
+    const dayName = document.createElement('p');
+    dayName.className = 'day-name';
+    dayName.textContent = dayOfWeek;
+
+    dateContainer.append(dayNumber, dayName);
+
+    // The icon
+    let weatherIcon;
+    const iconPath = getIconPath(icon);
+    if (iconPath) {
+      weatherIcon = document.createElement('div');
+      weatherIcon.className = 'icon';
+      weatherIcon.style.backgroundImage = `url(${iconPath})`;
+    }
+
+    // The weather conditions
+    const weatherConditions = document.createElement('p');
+    weatherConditions.className = 'day-weather-condition';
+    weatherConditions.textContent = conditions;
+
+    // The max/min temperatures
+    const maxMinTemps = document.createElement('p');
+    maxMinTemps.className = 'max-min-temps f-c';
+    maxMinTemps.textContent = `${Math.round(tempmax)}\u00B0/${Math.round(
+      tempmin
+    )}\u00B0`;
+
+    dayContainer.append(
+      dateContainer,
+      weatherIcon,
+      weatherConditions,
+      maxMinTemps
+    );
+
+    dailyDataContainer.appendChild(dayContainer);
+  });
+
+  dailyDataSection.append(headingContainer, dailyDataContainer);
+
+  const weatherDataContainer = document.querySelector(
+    '.weather-data-container'
+  );
+  weatherDataContainer.appendChild(dailyDataSection);
+}
