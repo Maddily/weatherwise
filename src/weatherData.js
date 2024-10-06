@@ -87,3 +87,166 @@ function displayLocation(location) {
     weatherDataContainer.appendChild(locationContainer);
   }
 }
+
+/**
+ * Display the current weather data in the DOM.
+ * @param {object} nowData - The current weather data
+ */
+function displayNowData(nowData) {
+  if (!nowData) {
+    throw Error('Invalid data:', nowData);
+  }
+
+  const {
+    feelslike,
+    temp,
+    tempmin,
+    tempmax,
+    conditions,
+    winddir,
+    windspeed,
+    humidity,
+    icon,
+  } = nowData;
+
+  // Create the 'now' section
+  const nowSection = document.createElement('section');
+  nowSection.className = 'now';
+
+  // Display the real feel temperature
+  const realFeelDiv = document.createElement('div');
+  realFeelDiv.className = 'real-feel';
+
+  const realFeelText = document.createElement('p');
+  realFeelText.className = 'real-feel-text';
+
+  const realFeelNumber = document.createElement('p');
+  realFeelNumber.className = 'real-feel-number f-c';
+
+  realFeelText.textContent = 'Feels like';
+  realFeelNumber.textContent = `${Math.round(feelslike)}\u00B0`;
+
+  realFeelDiv.append(realFeelText, realFeelNumber);
+
+  // Display the current temperature
+  const tempNow = document.createElement('div');
+  tempNow.className = 'temp f-c';
+  tempNow.textContent = `${Math.round(temp)}\u00B0C`;
+
+  // Display a temp F/C toggle button
+  const label = document.createElement('label');
+  label.setAttribute('for', 'checkbox');
+  label.className = 'toggler';
+
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('id', 'checkbox');
+  checkbox.checked = true;
+
+  const ball = document.createElement('span');
+  ball.className = 'ball';
+
+  const c = document.createElement('span');
+  c.textContent = '\u00B0C';
+  c.className = 'c';
+
+  const f = document.createElement('span');
+  f.textContent = '\u00B0F';
+  f.className = 'f';
+
+  label.append(checkbox, ball, c, f);
+
+  // Create a container for the temp + switch button
+  const tempSwitchContainer = document.createElement('div');
+  tempSwitchContainer.className = 'temp-switch-container';
+
+  tempSwitchContainer.append(tempNow, label);
+
+  // Create min-max-conditions div
+  const minMaxConditionsDiv = document.createElement('div');
+  minMaxConditionsDiv.className = 'min-max-conditions';
+
+  // Display the min temperature
+  const lowArrow = createLowArrowIcon();
+
+  const tempMin = document.createElement('div');
+  tempMin.className = 'min';
+
+  const minText = document.createElement('p');
+  minText.className = 'f-c';
+  minText.textContent = `${Math.round(tempmin)}\u00B0`;
+  tempMin.append(lowArrow, minText);
+
+  // Display the max temperature
+  const highArrow = createHighArrowIcon();
+
+  const tempMax = document.createElement('div');
+  tempMax.className = 'max';
+
+  const maxText = document.createElement('p');
+  maxText.className = 'f-c';
+  maxText.textContent = `${Math.round(tempmax)}\u00B0`;
+  tempMax.append(maxText, highArrow);
+
+  // Display the current weather conditions
+  const conditionsNow = document.createElement('p');
+  conditionsNow.className = 'conditions';
+  conditionsNow.textContent = conditions;
+
+  minMaxConditionsDiv.append(tempMin, conditionsNow, tempMax);
+
+  // Create the wind-humidity div
+  const windHumidity = document.createElement('div');
+  windHumidity.className = 'wind-humidity';
+
+  // Display the wind direction
+  const windDir = document.createElement('div');
+  windDir.className = 'wind-dir';
+
+  const windArrow = createWindArrowIcon();
+  const windDirText = document.createElement('p');
+  windDirText.textContent = getWindDirectionText(winddir);
+  windDir.append(windArrow, windDirText);
+
+  // Display the wind speed
+  const windSpeed = document.createElement('div');
+  windSpeed.className = 'wind-speed';
+
+  const windmill = createWindmillIcon();
+  const windSpeedText = document.createElement('p');
+  windSpeedText.textContent = `${windspeed}km/h`;
+  windSpeed.append(windmill, windSpeedText);
+
+  // Display the humidity
+  const humidityNow = document.createElement('div');
+  humidityNow.className = 'humidity';
+
+  const humidityIcon = createHumidityIcon();
+  const humidityText = document.createElement('p');
+  humidityText.textContent = `${Math.round(humidity)}%`;
+  humidityNow.append(humidityIcon, humidityText);
+
+  windHumidity.append(windDir, windSpeed, humidityNow);
+
+  // Display the weather icon
+  let weatherIcon;
+  const iconPath = getIconPath(icon);
+  if (iconPath) {
+    weatherIcon = document.createElement('div');
+    weatherIcon.className = 'icon';
+    weatherIcon.style.backgroundImage = `url(${iconPath})`;
+  }
+
+  nowSection.append(
+    realFeelDiv,
+    tempSwitchContainer,
+    minMaxConditionsDiv,
+    windHumidity,
+    weatherIcon
+  );
+
+  const weatherDataContainer = document.querySelector(
+    '.weather-data-container'
+  );
+  weatherDataContainer.appendChild(nowSection);
+}
