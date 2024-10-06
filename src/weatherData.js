@@ -63,3 +63,27 @@ export default async function handleInput(location) {
     }
   }
 }
+
+/**
+ * Display the location (city name) in the DOM.
+ * @param {string} location - The name of a city
+ */
+function displayLocation(location) {
+  if (location) {
+    const locationContainer = document.createElement('div');
+    locationContainer.className = 'location-container';
+
+    const locationIcon = createLocationIcon();
+
+    const locationText = document.createElement('h1');
+    locationText.className = 'location';
+    locationText.textContent = location;
+
+    locationContainer.append(locationIcon, locationText);
+
+    const weatherDataContainer = document.querySelector(
+      '.weather-data-container'
+    );
+    weatherDataContainer.appendChild(locationContainer);
+  }
+}
