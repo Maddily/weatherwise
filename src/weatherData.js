@@ -412,3 +412,43 @@ function displayDailyData(dailyData) {
   );
   weatherDataContainer.appendChild(dailyDataSection);
 }
+
+/**
+ * Display data for pressure, UV Index, visibility and humidity
+ * @param {object} nowData - The current weather data
+ */
+function displayOtherData(nowData) {
+  const { pressure, uvindex, visibility, visibilityText, humidity, dew } =
+    nowData;
+
+  // Create a section for all data
+  const dataSection = document.createElement('section');
+  dataSection.className = 'pressure-uv-visibility-humidity';
+
+  // Create pressure container
+  const pressureContainer = createPressureContainer(pressure);
+
+  // Create UV index container
+  const uvIndexContainer = createUvIndexContainer(uvindex);
+
+  // Create visibility container
+  const visibilityContainer = createVisibilityContainer(
+    visibility,
+    visibilityText
+  );
+
+  // Create humidity container
+  const humidityContainer = createHumidityContainer(humidity, dew);
+
+  dataSection.append(
+    pressureContainer,
+    uvIndexContainer,
+    visibilityContainer,
+    humidityContainer
+  );
+
+  const weatherDataContainer = document.querySelector(
+    '.weather-data-container'
+  );
+  weatherDataContainer.appendChild(dataSection);
+}
