@@ -610,3 +610,12 @@ function createHumidityContainer(humidity, dew) {
 
   return humidityContainer;
 }
+
+// Enable temperature conversion
+function convertTemperatureHelper() {
+  const checkbox = document.getElementById('checkbox');
+
+  if (checkbox) {
+    checkbox.addEventListener('click', convertTemperatures);
+  }
+}
