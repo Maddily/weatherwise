@@ -487,3 +487,48 @@ function createPressureContainer(pressure) {
 
   return pressureContainer;
 }
+
+/**
+ * Display the UV index value
+ * @param {number} uvindex - The UV index
+ */
+function createUvIndexContainer(uvindex) {
+  // Create a container for the uv index data
+  const uvIndexContainer = document.createElement('div');
+  uvIndexContainer.className = 'uv-index-container other-data-container';
+
+  // Create a heading
+  const heading = document.createElement('h3');
+  heading.className = 'uv-index-heading';
+  heading.textContent = 'UV Index';
+
+  // Create UV index icon
+  const uvIndexIcon = createUvIndexIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(uvIndexIcon, heading);
+
+  // The UV index value
+  const uvIndexValue = document.createElement('p');
+  uvIndexValue.textContent = uvindex;
+
+  // The UV index text value
+  const { value, phrase } = getUvIndexText(uvindex);
+  const uvIndexTextValue = document.createElement('p');
+  uvIndexTextValue.textContent = value;
+
+  const uvIndexPhrase = document.createElement('p');
+  uvIndexPhrase.textContent = phrase;
+
+  uvIndexContainer.append(
+    headingContainer,
+    uvIndexValue,
+    uvIndexTextValue,
+    uvIndexPhrase
+  );
+
+  return uvIndexContainer;
+}
