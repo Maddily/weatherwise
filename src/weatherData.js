@@ -532,3 +532,43 @@ function createUvIndexContainer(uvindex) {
 
   return uvIndexContainer;
 }
+
+/**
+ * Display the Visibility data
+ * @param {number} visibility - The visibility value
+ */
+function createVisibilityContainer(visibility, visibilityText) {
+  // Create a container for the visibility data
+  const visibilityContainer = document.createElement('div');
+  visibilityContainer.className = 'visibility-container other-data-container';
+
+  // Create a heading
+  const heading = document.createElement('h3');
+  heading.className = 'visibility-heading';
+  heading.textContent = 'Visibility';
+
+  // Create visibility icon
+  const visibilityIcon = createVisibilityIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(visibilityIcon, heading);
+
+  // The visibility value
+  const visibilityValue = document.createElement('p');
+  visibilityValue.textContent = `${visibility} km`;
+
+  // The visibility text value
+  const visibilityTextValue = document.createElement('p');
+  visibilityTextValue.textContent = visibilityText;
+
+  visibilityContainer.append(
+    headingContainer,
+    visibilityValue,
+    visibilityTextValue
+  );
+
+  return visibilityContainer;
+}
