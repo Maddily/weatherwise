@@ -250,3 +250,73 @@ function displayNowData(nowData) {
   );
   weatherDataContainer.appendChild(nowSection);
 }
+
+/**
+ * Display hourly weather data in the DOM.
+ * @param {object} hourlyData - Weather data for the hours remaining in the day
+ */
+function displayHourlyData(hourlyData) {
+  if (!hourlyData || !Array.isArray(hourlyData)) {
+    throw Error('Invalid data');
+  }
+
+  // Create a section for hourlyData
+  const hourlyDataSection = document.createElement('section');
+  hourlyDataSection.className = 'hourly';
+
+  // Create a heading for the hourly data
+  const heading = document.createElement('h2');
+  heading.className = 'hourly-heading';
+  heading.textContent = 'Hourly Forecast';
+
+  // Create an svg icon for the heading
+  const hourlyIcon = createHourlyIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(hourlyIcon, heading);
+
+  // Create a container for the hourly data
+  const hourlyDataContainer = document.createElement('div');
+  hourlyDataContainer.className = 'hourly-data-container';
+
+  hourlyData.forEach((hourData) => {
+    const { datetime, icon, temp } = hourData;
+
+    // A container for an hour's weather details
+    const hourContainer = document.createElement('div');
+    hourContainer.className = 'hour-container';
+
+    // The hour
+    const hour = document.createElement('p');
+    hour.className = 'hour';
+    hour.textContent = formatTime(datetime);
+
+    // The icon
+    let weatherIcon;
+    const iconPath = getIconPath(icon);
+    if (iconPath) {
+      weatherIcon = document.createElement('div');
+      weatherIcon.className = 'icon';
+      weatherIcon.style.backgroundImage = `url(${iconPath})`;
+    }
+
+    // The temperature
+    const temperature = document.createElement('p');
+    temperature.className = 'hour-temp f-c';
+    temperature.textContent = `${Math.round(temp)}\u00B0`;
+
+    hourContainer.append(hour, weatherIcon, temperature);
+
+    hourlyDataContainer.appendChild(hourContainer);
+  });
+
+  hourlyDataSection.append(headingContainer, hourlyDataContainer);
+
+  const weatherDataContainer = document.querySelector(
+    '.weather-data-container'
+  );
+  weatherDataContainer.appendChild(hourlyDataSection);
+}
