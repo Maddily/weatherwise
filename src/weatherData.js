@@ -619,3 +619,57 @@ function convertTemperatureHelper() {
     checkbox.addEventListener('click', convertTemperatures);
   }
 }
+
+// Convert all displayed temperatures from f to c or from c to f.
+function convertTemperatures() {
+  const temps = document.querySelectorAll('.f-c');
+  const checkbox = document.getElementById('checkbox');
+
+  temps.forEach((temp) => {
+    const textContent = temp.textContent.trim();
+
+    // Daily forecast
+    if (textContent.includes('/')) {
+      const [tempMax, tempMin] = textContent.split('/').map((t) => parseInt(t));
+
+      let newTempMin;
+      let newTempMax;
+
+      if (checkbox.checked) {
+        newTempMin = convertFToC(tempMin);
+        newTempMax = convertFToC(tempMax);
+      } else {
+        newTempMin = convertCToF(tempMin);
+        newTempMax = convertCToF(tempMax);
+      }
+
+      temp.textContent = `${newTempMax}\u00B0/${newTempMin}\u00B0`;
+    } // Current temperature
+    else if (textContent.includes('C') || textContent.includes('F')) {
+      const currentTemp = parseInt(textContent);
+
+      let newTemp;
+
+      if (checkbox.checked) {
+        newTemp = convertFToC(currentTemp);
+      } else {
+        newTemp = convertCToF(currentTemp);
+      }
+
+      temp.textContent = textContent.includes('C')
+        ? `${newTemp}\u00B0F`
+        : `${newTemp}\u00B0C`;
+    } // Temperatures displayed without C or F next to them
+    else {
+      const currentTemp = parseInt(textContent);
+      let newTemp;
+
+      if (checkbox.checked) {
+        newTemp = convertFToC(currentTemp);
+      } else {
+        newTemp = convertCToF(currentTemp);
+      }
+      temp.textContent = `${newTemp}\u00B0`;
+    }
+  });
+}
