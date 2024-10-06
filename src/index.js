@@ -28,4 +28,4 @@ function retrieveInput() {
 
 document.addEventListener('DOMContentLoaded', () => {
   retrieveInput();
-})
+});
