@@ -572,3 +572,41 @@ function createVisibilityContainer(visibility, visibilityText) {
 
   return visibilityContainer;
 }
+
+/**
+ * Display the humidity data
+ * @param {number} humidity - The humidity value
+ */
+function createHumidityContainer(humidity, dew) {
+  // Create a container for the humidity data
+  const humidityContainer = document.createElement('div');
+  humidityContainer.className = 'humidity-container other-data-container';
+
+  // Create a heading
+  const heading = document.createElement('h3');
+  heading.className = 'humidity-heading';
+  heading.textContent = 'humidity';
+
+  // Create humidity icon
+  const humidityIcon = createHumidityIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(humidityIcon, heading);
+
+  // The humidity value
+  const humidityValue = document.createElement('p');
+  humidityValue.textContent = `${Math.round(humidity)}%`;
+
+  // The humidity text value
+  const humidityTextValue = document.createElement('p');
+  humidityTextValue.textContent = `The dew point is ${Math.round(
+    dew
+  )}\u00B0 right now.`;
+
+  humidityContainer.append(headingContainer, humidityValue, humidityTextValue);
+
+  return humidityContainer;
+}
