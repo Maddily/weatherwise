@@ -452,3 +452,38 @@ function displayOtherData(nowData) {
   );
   weatherDataContainer.appendChild(dataSection);
 }
+
+/**
+ * Display the air pressure value
+ * @param {number} pressure - The air pressure
+ */
+function createPressureContainer(pressure) {
+  // Create a container for the pressure data
+  const pressureContainer = document.createElement('div');
+  pressureContainer.className = 'pressure-container other-data-container';
+
+  // Create a heading
+  const heading = document.createElement('h3');
+  heading.className = 'pressure-heading';
+  heading.textContent = 'Pressure';
+
+  // Create a pressure icon
+  const pressureIcon = createAirPressureIcon();
+
+  // Create a container for the heading
+  const headingContainer = document.createElement('div');
+  headingContainer.className = 'heading-container';
+
+  headingContainer.append(pressureIcon, heading);
+
+  // Create pressure gauge icon
+  const gaugeIcon = createGaugeIcon();
+
+  const pressureValue = document.createElement('p');
+  pressureValue.className = 'pressure-value';
+  pressureValue.textContent = `${pressure} mbar`;
+
+  pressureContainer.append(headingContainer, gaugeIcon, pressureValue);
+
+  return pressureContainer;
+}
