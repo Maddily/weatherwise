@@ -2,6 +2,7 @@
 Weatherwise is a responsive weather application that provides real-time weather updates, including current conditions, hourly forecasts, and a 10-day outlook. Built with a robust backend and a user-friendly frontend, this app is designed to deliver accurate weather data with a smooth user experience.
 
 ## Table of Contents
+- [How to Access WeatherWise](#how-to-access)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
@@ -10,6 +11,9 @@ Weatherwise is a responsive weather application that provides real-time weather 
 - [Folder Structure](#folder-structure)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
+
+## How to Access WeatherWise
+WeatherWise is hosted on Vercel. You can access it directly through the following link: https://weatherwiseforecast.vercel.app/
 
 ## Features
 - **Real-Time Weather Data**: Provides current conditions, hourly forecasts, and a 10-day forecast.
