@@ -1,3 +1,8 @@
+const URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://weatherwiseforecast.vercel.app'
+    : 'http://localhost:5000';
+
 /**
  * Fetch data from the backend API
  * @param {string} type - today, daily or hourly
@@ -5,7 +10,7 @@
  * @returns The weather data fetched from the backend API
  */
 export default async function fetchData(type, location) {
-  const response = await fetch(`http://localhost:5000/${type}/${location}`);
+  const response = await fetch(`${URL}/${type}/${location}`);
 
   if (!response.ok) {
     const { error } = await response.json();
