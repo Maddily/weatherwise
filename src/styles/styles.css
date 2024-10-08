@@ -464,7 +464,7 @@ footer {
 
 .visibility-text,
 .error-container p {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .min-max-conditions .conditions,
@@ -716,7 +716,7 @@ footer a span {
 
 @media screen and (min-width: 500px) {
   .error-container p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 
