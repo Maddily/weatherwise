@@ -585,7 +585,7 @@ function createHumidityContainer(humidity, dew) {
   // Create a heading
   const heading = document.createElement('h3');
   heading.className = 'humidity-heading';
-  heading.textContent = 'humidity';
+  heading.textContent = 'Humidity';
 
   // Create humidity icon
   const humidityIcon = createHumidityIcon();

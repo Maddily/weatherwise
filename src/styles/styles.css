@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
   --main-bg-color: #a5b49b;
@@ -27,7 +28,7 @@
 html,
 body {
   height: 100vh;
-  font-family: 'Handjet', sans-serif;
+  font-family: 'VT323', 'Handjet', sans-serif;
 }
 
 .background-1 {
@@ -62,6 +63,10 @@ body {
 footer,
 .links {
   display: flex;
+}
+
+.day-container div:first-of-type {
+  min-width: 60px;
 }
 
 .background-2,
@@ -122,7 +127,7 @@ header {
 
 .logo {
   background: url('../assets/images/logo.png');
-  height: 100px;
+  height: 80px;
 }
 
 .logo,
@@ -167,6 +172,11 @@ footer {
   border: 2px solid var(--green-7);
   padding: 0 10px;
   flex-grow: 3;
+}
+
+.search input::placeholder {
+  color: var(--green-6-transparent);
+  font-size: 0.9rem;
 }
 
 .search input,
@@ -227,7 +237,8 @@ footer {
   border: 1px solid var(--green-6);
   padding: 5px 5px;
   flex-grow: 1;
-  height: 40px;
+  max-width: 40px;
+  height: 30px;
 }
 
 .search input,
@@ -236,7 +247,7 @@ footer {
 }
 
 button svg {
-  width: 30px;
+  width: 20px;
 }
 
 .weather-data-container,
@@ -287,13 +298,12 @@ p,
 
 .location-container .location {
   text-transform: capitalize;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }
 
 .location-container svg,
-.ball,
 .heading-container svg {
-  width: 25px;
+  width: 20px;
 }
 
 .location-container::after,
@@ -374,7 +384,6 @@ p,
 }
 
 .real-feel {
-  font-size: 1.25rem;
   letter-spacing: 0.5px;
 }
 
@@ -398,7 +407,7 @@ p,
 }
 
 .temp {
-  font-size: 3rem;
+  font-size: 2.3rem;
 }
 
 #checkbox,
@@ -419,7 +428,7 @@ p,
 
 .toggler {
   width: 60px;
-  height: 31px;
+  height: 29px;
   border-radius: 30px;
 }
 
@@ -444,6 +453,7 @@ footer {
 
 .ball {
   display: inline-block;
+  width: 25px;
   height: 25px;
   left: 1px;
   z-index: 10;
@@ -469,13 +479,11 @@ footer {
 
 .min-max-conditions,
 .links {
-  gap: 20px;
+  gap: 10px;
 }
 
-.min-max-conditions,
 .visibility-text,
-.error-container p,
-h3 {
+.error-container p{
   font-size: 1.3rem;
 }
 
@@ -496,10 +504,12 @@ h3 {
   color: var(--yellow-3);
 }
 
-.wind-humidity,
-.hour-container,
 .day-container {
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+.hour {
+  margin-bottom: 8px;
 }
 
 .wind-humidity,
@@ -531,8 +541,8 @@ h3 {
 }
 
 .now .icon {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 
 .hourly,
@@ -551,10 +561,8 @@ h3 {
   padding: 5px 15px 5px 9px;
 }
 
-.hourly-heading,
-.daily-heading,
 .uv-index-container p:nth-of-type(2) {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .hourly-data-container {
@@ -583,7 +591,7 @@ h3 {
 
 .day-container,
 footer {
-  gap: 30px;
+  gap: 10px;
 }
 
 .day-number {
@@ -614,7 +622,12 @@ footer {
 }
 
 .pressure-uv-visibility-humidity .heading-container {
-  gap: 2px;
+  gap: 5px;
+}
+
+.pressure-container > svg {
+  width: 100px;
+  margin-top: 20px;
 }
 
 .pressure-value,
@@ -643,7 +656,7 @@ footer {
 .uv-index-container p:first-of-type,
 .visibility-container p:first-of-type,
 .humidity-container p:first-of-type {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .visibility-container::after {
@@ -651,9 +664,16 @@ footer {
 }
 
 .search button,
+.real-feel,
+.wind-humidity,
 .humidity-container p:last-of-type,
-.uv-index-container p:last-of-type {
-  font-size: 1.1rem;
+.uv-index-container p:last-of-type,
+.min-max-conditions,
+.hour-container,
+.hourly-heading,
+.daily-heading,
+h3 {
+  font-size: 1rem;
 }
 
 .humidity-container::after {
@@ -671,8 +691,8 @@ footer {
 .loader {
   border: 8px solid var(--cloud-yellow);
   border-top: 8px solid var(--green-2);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin: 100px auto;
   animation: spin 2s linear infinite;
 }
@@ -687,6 +707,7 @@ footer {
   background: var(--green-3);
   margin-top: auto;
   padding: 10px 0;
+  font-size: 0.8rem;
 }
 
 footer a {
@@ -714,10 +735,6 @@ footer a span {
 }
 
 @media screen and (min-width: 500px) {
-  .weather-data-container {
-    width: 350px;
-  }
-
   .error-container p {
     font-size: 1.4rem;
   }
@@ -729,13 +746,9 @@ footer a span {
   }
 }
 
-@media screen and (min-width: 900px) {
-  .logo {
-    height: 120px;
-  }
-
+@media screen and (min-width: 800px) {
   .search {
-    width: 400px;
+    width: 350px;
   }
 
   .search button {
@@ -765,7 +778,8 @@ footer a span {
   .weather-data-container {
     width: 100%;
     justify-content: center;
-    grid-template-columns: 150px 150px 150px 150px;
+    justify-items: center;
+    grid-template-columns: 130px 130px 130px 130px;
     grid-template-rows: auto;
     grid-template-areas:
       'location . . .'
@@ -780,15 +794,5 @@ footer a span {
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .weather-data-container {
-    gap: 100px;
-  }
-
-  .pressure-unit-container {
-    font-size: 1.5rem;
   }
 }
