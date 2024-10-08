@@ -6,7 +6,7 @@ import createRouter from './routes/index.js';
 import AppController from './controllers/AppController.js';
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const router = createRouter(AppController);
 
 const __filename = fileURLToPath(import.meta.url);
