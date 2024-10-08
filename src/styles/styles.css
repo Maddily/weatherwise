@@ -186,24 +186,8 @@ footer a {
   color: var(--green-2);
 }
 
-.search input,
-.error-container p,
-footer {
-  letter-spacing: 2px;
-}
-
 .search input:focus {
   outline: none;
-}
-
-.search button,
-.location-container,
-.now,
-.hourly,
-.daily,
-.other-data-container,
-.error-container {
-  letter-spacing: 1px;
 }
 
 .search button,
@@ -383,10 +367,6 @@ p,
   gap: 5px;
 }
 
-.real-feel {
-  letter-spacing: 0.5px;
-}
-
 .real-feel-number,
 .min-max-conditions .min,
 .min-max-conditions .max {
@@ -483,7 +463,7 @@ footer {
 }
 
 .visibility-text,
-.error-container p{
+.error-container p {
   font-size: 1.3rem;
 }
 
