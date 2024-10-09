@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(cors());
 app.use(router);
 
+// Set `trust proxy` to `true` so that `req.ip` returns real IP addresses
+app.set('trust proxy', true);
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}...`);
 });
