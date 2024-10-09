@@ -488,10 +488,6 @@ footer {
   font-size: 1rem;
 }
 
-.hour {
-  margin-bottom: 8px;
-}
-
 .wind-humidity,
 .hour-container .icon {
   height: 35px;
