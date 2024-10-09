@@ -5,7 +5,7 @@
  * @returns The weather data fetched from the backend API
  */
 export default async function fetchData(type, location) {
-  const response = await fetch(`https://weatherwiseforecast.vercel.app/${type}/${location}`);
+  const response = await fetch(`http://wwforecast.vercel.app/${type}/${location}`);
 
   if (!response.ok) {
     const { error } = await response.json();
