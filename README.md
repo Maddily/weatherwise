@@ -13,7 +13,7 @@ Weatherwise is a responsive weather application that provides real-time weather 
 - [License](#license)
 
 ## How to Access WeatherWise
-WeatherWise is hosted on Vercel. You can access it directly through the following link: https://weatherwiseforecast.vercel.app/
+WeatherWise is hosted on Vercel. You can access it directly through the following link: [https://weatherwiseforecast.vercel.app/](https://weatherwise-ivit6h19q-maddilys-projects.vercel.app/)
 
 ## Features
 - **Real-Time Weather Data**: Provides current conditions, hourly forecasts, and a 10-day forecast.

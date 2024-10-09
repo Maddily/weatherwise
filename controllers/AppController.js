@@ -23,7 +23,7 @@ export default class AppController {
         const weatherData =
           cachedData ||
           (await AppController._fetchData(
-            req.socket.remoteAddress,
+            req.ip,
             location,
             minutesToSeconds(10)
           ));
@@ -95,7 +95,7 @@ export default class AppController {
         const weatherData =
           cachedData ||
           (await AppController._fetchData(
-            req.socket.remoteAddress,
+            req.ip,
             location,
             minutesToSeconds(10)
           ));
@@ -166,7 +166,7 @@ export default class AppController {
         const weatherData =
           cachedData ||
           (await AppController._fetchData(
-            req.socket.remoteAddress,
+            req.ip,
             location,
             minutesToSeconds(10)
           ));
