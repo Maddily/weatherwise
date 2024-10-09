@@ -36,19 +36,25 @@ WeatherWise is hosted on Vercel. You can access it [here](https://wwforecast.ver
     git clone https://github.com/Maddily/weatherwise.git
     cd weatherwise
     ```
-2. **Install Dependencies**:
+2. **Update URL Passed to `fetch`**:
+    Go to `src/fetchData.js` and change the URL passed to `fetch` in the template literal from 'https://wwforecast.vercel.app/' to 'http://localhost:5000/'.
+3. **Install Dependencies**:
     ```bash
     npm install
     ```
-3. **Configure Environment Variables**: Create a `.env` file in the root directory with your API key:
+4. **Configure Environment Variables**: Create a `.env` file in the root directory with your API key:
     ```makefile
     VISUAL_CROSSING_API_KEY=your_api_key
     ```
-4. **Run Redis Server**: If Redis is not already running, start it using:
+5. **Start the Express.js Server**:
+    ```bash
+    npm run dev
+    ```
+6. **Run Redis Server**: If Redis is not already running, start it using:
     ```bash
     redis-server
     ```
-5. **Start the Application**:
+7. **Start the Application**:
     ```bash
     npm start
     ```
