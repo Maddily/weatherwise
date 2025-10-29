@@ -27,5 +27,10 @@ function retrieveInput() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Update copyright year
+  const thisYear = new Date().getFullYear();
+  const copyrightParagraph = document.querySelector('copyright');
+  copyrightParagraph.textContent = `&#169; ${thisYear} WeatherWise. All rights reserved.`;
+
   retrieveInput();
 });
