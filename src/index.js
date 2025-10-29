@@ -1,36 +1,38 @@
-import './styles/styles.css';
-import './styles/normalize.css';
-import handleInput from './weatherData.js';
+import "./styles/styles.css";
+import "./styles/normalize.css";
+import handleInput from "./weatherData.js";
 
 // Retrieve user input from the DOM and call a function to handle it.
 function retrieveInput() {
-  const button = document.querySelector('button');
-  const input = document.querySelector('input');
+  const button = document.querySelector("button");
+  const input = document.querySelector("input");
 
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     if (input.value) {
       handleInput(input.value.toLowerCase());
-      input.value = '';
+      input.value = "";
       input.blur();
     }
   });
 
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
       if (input.value) {
         handleInput(input.value.toLowerCase());
-        input.value = '';
+        input.value = "";
         input.blur();
       }
     }
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Update copyright year
   const thisYear = new Date().getFullYear();
-  const copyrightParagraph = document.querySelector('copyright');
-  copyrightParagraph.textContent = `&#169; ${thisYear} WeatherWise. All rights reserved.`;
+  const copyrightParagraph = document.querySelector("copyright");
+  if (copyrightParagraph) {
+    copyrightParagraph.textContent = `&#169; ${thisYear} WeatherWise. All rights reserved.`;
+  }
 
   retrieveInput();
 });
