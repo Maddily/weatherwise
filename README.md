@@ -44,7 +44,7 @@ WeatherWise is hosted on Vercel. You can access it [here](https://wwforecast.ver
     ```
 4. **Configure Environment Variables**: Create a `.env` file in the root directory with your API key:
     ```makefile
-    VISUAL_CROSSING_API_KEY=your_api_key
+    API_KEY=your_api_key
     ```
 5. **Start the Express.js Server**:
     ```bash
