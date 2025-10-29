@@ -29,7 +29,7 @@ function retrieveInput() {
 document.addEventListener("DOMContentLoaded", () => {
   // Update copyright year
   const thisYear = new Date().getFullYear();
-  const copyrightParagraph = document.querySelector("copyright");
+  const copyrightParagraph = document.querySelector(".copyright");
   if (copyrightParagraph) {
     copyrightParagraph.textContent = `&#169; ${thisYear} WeatherWise. All rights reserved.`;
   }
